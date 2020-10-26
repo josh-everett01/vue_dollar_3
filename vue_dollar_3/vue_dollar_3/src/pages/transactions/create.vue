@@ -23,6 +23,14 @@
       <label for="credit">Credit</label>
     </div>
 
+    <template v-if="errors">
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">
+          {{ error }}
+        </li>
+      </ul>
+    </template>
+
     <div class="input-field">
       <label for="description">Description</label>
       <input
@@ -59,11 +67,26 @@ export default {
         description: '',
         amount: '',
       },
+      errors: [],
+      error: '',
     };
   },
   methods: {
     addTransaction() {
+      if (!this.validForm()) {
+        return;
+      }
+
       this.$store.dispatch('addTransaction', this.form);
+    },
+    validForm() {
+      this.errors = [];
+      if (!this.form.description) {
+        this.errors.push('Description is required');
+      }
+      if (!this.form.amount) {
+        this.errors.push('Amount is required');
+      }
     },
   },
 };
