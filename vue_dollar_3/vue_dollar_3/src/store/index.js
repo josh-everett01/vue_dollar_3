@@ -6,17 +6,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 
   state: {
-    transactions: [],
+    transactions: [
+      { type: 'debit', description: 'Something responsible', amount: 4500 },
+      { type: 'credit', description: 'Payroll', amount: 100000 },
+    ],
   },
 
   getters: {
+    getTransactions(state) {
+      return state.transactions;
+    },
 
   },
 
   mutations: {
     addTransaction(state, transaction) {
       state.transactions.unshift(JSON.parse(JSON.stringify(transaction)));
-      debugger;
       // eslint-disable-next-line no-console
     },
   },
