@@ -15,7 +15,7 @@
 
       <input
         type="radio"
-        id="crdit"
+        id="credit"
         name="transaction_type"
         v-model="form.type"
         value="credit"
@@ -43,9 +43,9 @@
         placeholder="Enter Amount"
         v-model="form.amount"
       />
-      <div>
-        <button>Add</button>
-      </div>
+    </div>
+    <div>
+      <button @click="addTransaction">Add</button>
     </div>
   </div>
 </template>
@@ -61,6 +61,11 @@ export default {
       },
     };
   },
+  methods: {
+    addTransaction() {
+      this.$store.dispatch('addTransaction', this.form);
+    },
+  },
 };
 </script>
 
@@ -69,6 +74,29 @@ export default {
   display: flex;
   margin-bottom: 36px;
   overflow: hidden;
+}
+.input-field {
+  display: flex;
+  flex-direction: column;
+  width: 20em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.input-field label {
+  font-size: 0.75em;
+  margin-bottom: 10px;
+}
+
+.input-field input {
+  padding: 10px 0;
+}
+
+.currency {
+  font-size: 25px;
+  padding: 2px 8px 0 0;
+  color: #999;
 }
 
 .toggle-switch input {
