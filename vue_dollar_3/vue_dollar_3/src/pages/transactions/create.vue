@@ -9,7 +9,6 @@
         name="transaction_type"
         v-model="form.type"
         value="debit"
-        checked
       />
       <label for="debit">Debit</label>
 
@@ -52,7 +51,7 @@
         v-model="form.amount"
       />
     </div>
-    <div>
+    <div class="mb-12">
       <button @click="addTransaction">Add</button>
     </div>
   </div>
@@ -73,11 +72,10 @@ export default {
   },
   methods: {
     addTransaction() {
-      if (!this.validForm()) {
-        return;
+      if (this.validForm()) {
+        this.$store.dispatch('addTransaction', this.form);
+        this.$router.push({ path: '/transactions' });
       }
-
-      this.$store.dispatch('addTransaction', this.form);
     },
     validForm() {
       this.errors = [];
@@ -87,6 +85,7 @@ export default {
       if (!this.form.amount) {
         this.errors.push('Amount is required');
       }
+      return true;
     },
   },
 };
