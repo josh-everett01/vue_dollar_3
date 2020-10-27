@@ -16,6 +16,13 @@ export default new Vuex.Store({
     getTransactions(state) {
       return state.transactions;
     },
+    getTotal(state) {
+      let balance = 0;
+      if (state.transactions.length) {
+        state.transactions.forEach((transaction) => { if (transaction.type === 'credit') { balance += transaction.amount; } else { balance -= transaction.amount; } });
+      }
+      return balance.toFixed(2);
+    },
 
   },
 

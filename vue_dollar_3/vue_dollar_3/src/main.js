@@ -5,6 +5,8 @@ import App from './App';
 import router from './router';
 import store from './store/index';
 import Navigation from './components/Navigation';
+import TotalBar from './components/TotalBar';
+
 
 Vue.config.productionTip = false;
 
@@ -13,6 +15,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App, Navigation },
+  components: { App, Navigation, TotalBar },
   template: '<App/>',
 });
