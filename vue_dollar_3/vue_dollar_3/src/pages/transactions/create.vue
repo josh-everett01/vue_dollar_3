@@ -79,11 +79,17 @@ export default {
     },
     validForm() {
       this.errors = [];
+      if (!this.form.description && !this.form.amount) {
+        this.errors.push('Description & Amount are required');
+        return false;
+      }
       if (!this.form.description) {
         this.errors.push('Description is required');
+        return false;
       }
       if (!this.form.amount) {
         this.errors.push('Amount is required');
+        return false;
       }
       return true;
     },
