@@ -25,7 +25,9 @@ export default {
         sign = '-';
         dollar *= -1;
       }
-      return sign + dollar.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+      return (
+        sign + dollar.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1, ')
+      );
     },
   },
 };
