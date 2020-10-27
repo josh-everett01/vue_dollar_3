@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center" @keyup.enter="addTransaction">
     <h1>Add Transaction</h1>
 
     <div class="toggle-switch">
