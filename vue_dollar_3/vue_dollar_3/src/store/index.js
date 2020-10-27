@@ -7,7 +7,7 @@ export default new Vuex.Store({
 
   state: {
     transactions: [
-      { type: 'debit', description: 'Something responsible', amount: 378.93 },
+      { type: 'debit', description: 'Supplies', amount: 378.93 },
       { type: 'credit', description: 'Payroll', amount: 1278.32 },
     ],
   },
@@ -21,7 +21,7 @@ export default new Vuex.Store({
       if (state.transactions.length) {
         state.transactions.forEach((transaction) => { if (transaction.type === 'credit') { balance += transaction.amount; } else { balance -= transaction.amount; } });
       }
-      return balance.toFixed(2);
+      return balance;
     },
 
   },
@@ -29,13 +29,18 @@ export default new Vuex.Store({
   mutations: {
     addTransaction(state, transaction) {
       state.transactions.unshift(JSON.parse(JSON.stringify(transaction)));
-      // eslint-disable-next-line no-console
+    },
+    removeTransaction(state, index) {
+      state.transactions.splice(index, 1);
     },
   },
 
   actions: {
     addTransaction(context, transaction) {
       context.commit('addTransaction', transaction);
+    },
+    removeTransaction(context, index) {
+      context.commit('removeTransaction', index);
     },
   },
 

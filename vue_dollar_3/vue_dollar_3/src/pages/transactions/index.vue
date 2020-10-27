@@ -17,8 +17,9 @@
         </div>
         <div>{{ transaction.description.substring(0, 30) }}</div>
       </div>
-      <div class="amount">
-        {{ formatMoney(transaction.amount) }}
+      <div class="flex">
+        <div class="mr-4">{{ formatMoney(transaction.amount) }}</div>
+        <div><button @click.prevent="removeTransaction(index)">X</button></div>
       </div>
     </div>
   </div>
@@ -53,6 +54,9 @@ export default {
       }
       return sign + dollar.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     },
+    removeTransaction(index) {
+      this.$store.dispatch('removeTransaction', index);
+    },
   },
 };
 </script>
@@ -66,17 +70,10 @@ h1 {
   display: flex;
   justify-content: space-between;
   width: 20em;
-  padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 20px;
 }
 
 .transactions-div {
   display: flex;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 10%;
-}
-.amount {
-  margin-top: 10%;
 }
 </style>
