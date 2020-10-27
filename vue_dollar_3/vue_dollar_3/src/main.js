@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 import store from './store/index';
 import Navigation from './components/Navigation';
+import Modal from './components/Modal';
 import TotalBar from './components/TotalBar';
 
 
@@ -15,6 +16,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App, Navigation, TotalBar },
+  components: { App, Navigation, TotalBar, Modal },
   template: '<App/>',
 });

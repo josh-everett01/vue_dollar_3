@@ -10,6 +10,8 @@ export default new Vuex.Store({
       { type: 'debit', description: 'Supplies', amount: 378.93 },
       { type: 'credit', description: 'Payroll', amount: 1278.32 },
     ],
+    modal: false,
+    ModalResolve: null,
   },
 
   getters: {
@@ -19,9 +21,12 @@ export default new Vuex.Store({
     getTotal(state) {
       let balance = 0;
       if (state.transactions.length) {
-        state.transactions.forEach((transaction) => { if (transaction.type === 'credit') { balance += transaction.amount; } else { balance -= transaction.amount; } });
+        state.transactions.forEach((transaction) => { if (transaction.type === 'credit') { balance += Number(transaction.amount); } else { balance -= transaction.amount; } });
       }
       return balance;
+    },
+    getModal(state) {
+      return state.modal;
     },
 
   },
@@ -33,6 +38,18 @@ export default new Vuex.Store({
     removeTransaction(state, index) {
       state.transactions.splice(index, 1);
     },
+    hideModal(state) {
+      state.modal = false;
+    },
+    showModal(state, payload) {
+      state.ModalResolve = payload.resolve;
+      state.modal = true;
+    },
+    resolveModal(state) {
+      if (state.ModalResolve) {
+        state.ModalResolve();
+      }
+    },
   },
 
   actions: {
@@ -41,6 +58,18 @@ export default new Vuex.Store({
     },
     removeTransaction(context, index) {
       context.commit('removeTransaction', index);
+    },
+    hideModal(context) {
+      context.commit('hideModal');
+    },
+    showModal(context) {
+      return new Promise((resolve) => {
+        context.commit('showModal', { resolve });
+      });
+    },
+    resolveModal(context) {
+      context.commit('resolveModal');
+      context.commit('hideModal');
     },
   },
 

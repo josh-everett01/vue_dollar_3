@@ -18,12 +18,14 @@ export default {
   },
   methods: {
     formatMoney(amount) {
-      let dollar = amount;
+      let dollar = amount * 1;
       let sign = '$ ';
-
       if (dollar < 0) {
-        sign = '-';
+        sign = '$ -';
         dollar *= -1;
+      }
+      if (dollar === 0) {
+        return sign + 0;
       }
       return (
         sign + dollar.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1, ')

@@ -2,6 +2,7 @@
   <div id="app">
     <navigation></navigation>
     <total-bar></total-bar>
+    <modal></modal>
     <router-view />
   </div>
 </template>
@@ -9,6 +10,7 @@
 <script>
 import Navigation from './components/Navigation';
 import TotalBar from './components/TotalBar';
+import Modal from './components/Modal';
 
 import './styles/styles.css';
 
@@ -17,6 +19,7 @@ export default {
   components: {
     Navigation,
     TotalBar,
+    Modal,
   },
 };
 </script>
