@@ -11,6 +11,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "tailwindcss": "^1.9.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

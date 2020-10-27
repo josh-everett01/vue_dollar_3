@@ -8,7 +8,13 @@
       class="transaction"
     >
       <div class="transactions-div">
-        <div class="w-20">{{ transaction.type }}</div>
+        <div class="w-20">
+          <plus-sign
+            v-if="transaction.type === 'credit'"
+            class="text-green-500"
+          ></plus-sign>
+          <minus-sign v-else class="text-red-600"></minus-sign>
+        </div>
         <div>{{ transaction.description.substring(0, 30) }}</div>
       </div>
       <div class="amount">
@@ -20,6 +26,8 @@
 
 <script>
 const mapGetters = require('vuex').mapGetters;
+const PlusSign = require('../../components/ui/PlusSign').default;
+const MinusSign = require('../../components/ui/MinusSign').default;
 
 export default {
   data() {
@@ -27,13 +35,17 @@ export default {
       transaction: {},
     };
   },
+  components: {
+    PlusSign,
+    MinusSign,
+  },
   computed: {
     ...mapGetters(['getTransactions']),
   },
   methods: {
     formatMoney(amount) {
       let dollar = amount;
-      let sign = '$ ';
+      let sign = '$';
 
       if (dollar < 0) {
         sign = '- ';
