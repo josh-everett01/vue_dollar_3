@@ -18,6 +18,9 @@
         <div v-if="!transaction.description === undefined">
           {{ transaction.description.substring(0, 30) }}
         </div>
+        <div>
+          {{ transaction.description.substring(0, 30) }}
+        </div>
       </div>
       <div class="flex">
         <div class="mr-4">{{ formatMoney(transaction.amount) }}</div>
