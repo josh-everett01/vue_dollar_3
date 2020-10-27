@@ -21,10 +21,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 nav {
-  display: flex;
-  justify-content: space-evenly;
+  /* display: flex;
+  justify-content: space-evenly; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
+
+img {
+  grid-column: 2;
+  margin: auto;
+}
+
 a {
   align-self: center;
+  font-size: revert;
+  font-size: x-large;
 }
 </style>

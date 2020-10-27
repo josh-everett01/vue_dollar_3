@@ -3,15 +3,17 @@
     <h1>My Transactions</h1>
 
     <div
-      v-for="transaction in getTransactions"
-      :key="transaction"
+      v-for="(transaction, index) in getTransactions"
+      :key="index"
       class="transaction"
     >
       <div class="transactions-div">
         <div class="w-20">{{ transaction.type }}</div>
         <div>{{ transaction.description.substring(0, 30) }}</div>
       </div>
-      {{ transaction.amount }}
+      <div class="amount">
+        {{ formatMoney(transaction.amount) }}
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +29,18 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransactions']),
+  },
+  methods: {
+    formatMoney(amount) {
+      let dollar = amount;
+      let sign = '$ ';
+
+      if (dollar < 0) {
+        sign = '- ';
+        dollar *= -1;
+      }
+      return sign + dollar.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    },
   },
 };
 </script>
@@ -48,5 +62,9 @@ h1 {
 .transactions-div {
   display: flex;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 10%;
+}
+.amount {
+  margin-top: 10%;
 }
 </style>

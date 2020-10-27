@@ -7,8 +7,8 @@ export default new Vuex.Store({
 
   state: {
     transactions: [
-      { type: 'debit', description: 'Something responsible', amount: 4500 },
-      { type: 'credit', description: 'Payroll', amount: 100000 },
+      { type: 'debit', description: 'Something responsible', amount: 378.93 },
+      { type: 'credit', description: 'Payroll', amount: 1278.32 },
     ],
   },
 
