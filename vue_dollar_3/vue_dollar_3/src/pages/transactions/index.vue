@@ -15,11 +15,15 @@
           ></plus-sign>
           <minus-sign v-else class="text-red-600"></minus-sign>
         </div>
-        <div>{{ transaction.description.substring(0, 30) }}</div>
+        <div v-if="!transaction.description === undefined">
+          {{ transaction.description.substring(0, 30) }}
+        </div>
       </div>
       <div class="flex">
         <div class="mr-4">{{ formatMoney(transaction.amount) }}</div>
-        <div><button @click.prevent="removeTransaction(index)">X</button></div>
+        <div>
+          <button @click.prevent="removeTransaction">X</button>
+        </div>
       </div>
     </div>
   </div>
@@ -47,15 +51,17 @@ export default {
     formatMoney(amount) {
       let dollar = amount;
       let sign = '$';
-
       if (dollar < 0) {
         sign = '- ';
         dollar *= -1;
       }
+
       return sign + dollar.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     },
     removeTransaction(index) {
-      this.$store.dispatch('removeTransaction', index);
+      this.$store.dispatch('showModal').then(() => {
+        this.$store.dispatch('removeTransaction', index);
+      });
     },
   },
 };
